@@ -42,67 +42,12 @@
                 font-size: 1.5rem;
                 font-weight: 600;
                 background-color: #4d4d4d;
+                text-align: right;
             }
-            #buttondel {
-                background-color: rgb(48, 48, 48);
-                box-shadow: 
-                0 4px #232323;
-            }
-            #buttoneq {
-                background-color: rgb(0, 183, 255);
-                color: rgb(0, 0, 0);
-                box-shadow: 
-                0 4px rgb(0, 100, 128);
-            }
-            #buttonpourcent {
-                background-color: rgb(48, 48, 48);
-                box-shadow: 
-                0 4px #232323;
-            }
-            #buttonce {
-                background-color: rgb(48, 48, 48);
-                box-shadow: 
-                0 4px #232323;
-            }
-            #buttondelall {
-                background-color: rgb(48, 48, 48);
-                box-shadow: 
-                0 4px #232323;
-            }
-            #buttonx {
-                background-color: rgb(48, 48, 48);
-                box-shadow: 
-                0 4px #232323;
-            }
-            #buttonmin {
-                background-color: rgb(48, 48, 48);
-                box-shadow: 
-                0 4px #232323;
-            }
-            #buttonplus {
-                background-color: rgb(48, 48, 48);
-                box-shadow: 
-                0 4px #232323;
-            }
-            #button1x {
-                background-color: rgb(48, 48, 48);
-                box-shadow: 
-                0 4px #232323;
-            }
-            #buttonx2 {
-                background-color: rgb(48, 48, 48);
-                box-shadow: 
-                0 4px #232323;
-            }
-            #button2Vx {
-                background-color: rgb(48, 48, 48);
-                box-shadow: 
-                0 4px #232323;
-            }
-            #buttondivide {
-                background-color: rgb(48, 48, 48);
-                box-shadow: 
-                0 4px #232323;
+            .buttons2 {
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                gap: 2px;
             }
             #title {
                 height: 15px;
@@ -110,18 +55,24 @@
                 font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
                 color: #ffffff;
             }
+            #buttoneq {
+                background-color: #0080ff;
+                color: #000000;
+                box-shadow: 
+                0 4px #004875;
+            }
         </style>
     </head>
     <body>
         <div class="calculator">
             <h1 id="title">Calculator</h1>
-            <input id="input_calc" value="0"/>
+            <input type="text" id="input_calc" readonly value="0"/>
 
-            <div class="buttons">
+            <div class="buttons2">
                 <button id="buttonpourcent">%</button>
                 <button id="buttonce">CE</button>
                 <button id="buttondel">C</button>
-                <button id="buttondelall">[->]</button>
+                <button id="buttondelall">[4-|]</button>
                 <button id="button1x">1/x</button>
                 <button id="buttonx2">x^2</button>
                 <button id="button2Vx">2Vx</button>
@@ -130,6 +81,8 @@
                 <button id="button8">8</button>
                 <button id="button9">9</button>
                 <button id="buttonx">x</button>
+            </div>
+            <div class="buttons">
                 <button id="button4">4</button>
                 <button id="button5">5</button>
                 <button id="button6">6</button>
@@ -145,5 +98,80 @@
             </div>
         </div>
 
+        <script>
+            let input_ref = document.getElementById("input_calc");
+
+            if (!input_ref.value.isNaN) {
+                input_ref.value.isNaN = function (x) { return x !== x; };
+            }
+
+            for(let i = 0; i < 10; i++) {
+                document.getElementById("button" + i).onclick = function() {
+                    input_ref.value += i;
+                }
+            }
+
+            document.getElementById("buttondelall").onclick = function() {
+                    input_ref.value = input_ref.value.slice(0, -1);
+            }
+
+            document.getElementById("buttondel").onclick = function() {
+                    input_ref.value = 0;
+            }
+
+            document.getElementById("buttonce").onclick = function() {
+                    input_ref.value = 0;
+            }
+
+            document.getElementById("buttonplus").onclick = function() {
+                    input_ref.value += "+";
+            }
+
+            document.getElementById("buttoneq").onclick = function() {
+                    input_ref.value = eval(input_ref.value);
+            }
+
+            document.getElementById("buttonmin").onclick = function() {
+                    input_ref.value += "-";
+            }
+
+            document.getElementById("buttonx").onclick = function() {
+                    input_ref.value += "*";
+            }
+
+            document.getElementById("buttondivide").onclick = function() {
+                    input_ref.value += "/";
+            }
+
+            document.getElementById("buttondot").onclick = function() {
+                    input_ref.value += ".";
+            }
+
+            document.getElementById("buttonsymbols").onclick = function() {
+                    input_ref.value += "-";
+            }
+
+            document.getElementById("buttonx2").onclick = function() {
+                    input_ref.value += "**2";
+            }
+
+            document.getElementById("button2Vx").onclick = function() {
+                    input_ref.value = Math.sqrt(input_ref.value);
+            }
+
+            document.getElementById("button1x").onclick = function() {
+                    input_ref.value += "1/";
+            }
+
+            document.getElementById("buttonpourcent").onclick = function() {
+                    input_ref.value = input_ref.value / 100;
+            }
+            
+        </script>
+
     </body>
 </html>
+<!--
+  -> box-sizing
+  -> flexbox
+-->
